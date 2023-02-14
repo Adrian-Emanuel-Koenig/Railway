@@ -1,5 +1,5 @@
 const express = require("express");
-const connectionMDB = require("./src/connection/mongoDb.js").connectionMDB;
+const connectionMDB = require("./src/connection/mongodb.js").connectionMDB;
 const { dirname, format } = require("path");
 const { fileURLToPath } = require("url");
 const engine = require("express-handlebars").engine;
