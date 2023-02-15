@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js -p 8080",
     "testProf": "nodemon --prof app.js",
     "testPm2": "pm2 start ecosystem.config.cjs",
     "test": "0x app.js"
