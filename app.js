@@ -26,7 +26,7 @@ const { product, price, image } = faker;
 
 const args = minimist(process.argv.slice(2));
 const app = express();
-const port = args.p || 8080;
+const port = args.p;
 // const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const server = http.createServer(app);
