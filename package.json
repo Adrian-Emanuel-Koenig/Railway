@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js -p 8080",
+    "dev": "nodemon app.js -p 8080",
     "testProf": "nodemon --prof app.js",
     "testPm2": "pm2 start ecosystem.config.cjs",
     "test": "0x app.js"
@@ -24,6 +25,7 @@
     "minimist": "^1.2.7",
     "mongoose": "^6.8.1",
     "mongoose-findorcreate": "^3.0.0",
+    "nodemailer": "^6.9.1",
     "normalizr": "^3.6.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",

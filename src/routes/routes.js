@@ -44,8 +44,23 @@ const getSignIn = (req, res) => {
 const postSignIn = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  const avatar = req.body.avatar;
+  const name = req.body.name;
+  const surname = req.body.surname;
+  const age = req.body.age;
+  const address = req.body.address;
+  const number = req.body.number;
   logger.info(username + " Registrado");
-  res.render("login", { username, password });
+  res.render("login", {
+    username,
+    password,
+    avatar,
+    name,
+    surname,
+    age,
+    address,
+    number,
+  });
 };
 
 module.exports = {

@@ -44,7 +44,7 @@ server.listen(port, async () => {
 app.use(express.json());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(__dirname + "/src/public"));
+app.use(express.static(__dirname + "/src/public"));
 
 app.use(
   session({
@@ -87,13 +87,13 @@ app.use("/api/productos", Router);
 
 app.use("/api/productos-test", (req, res) => {
   let prodFaker = [];
-  for (let i = 0; i < 5; i++) {
-    prodFaker.push({
-      producto: faker.commerce.product(),
-      precio: faker.commerce.price(1000, 4000, 0, "$"),
-      image: faker.image.abstract(150, 150),
-    });
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   prodFaker.push({
+  //     producto: faker.commerce.product(),
+  //     precio: faker.commerce.price(1000, 4000, 0, "$"),
+  //     image: faker.image.abstract(150, 150),
+  //   });
+  // }
   res.json(prodFaker);
 });
 
@@ -226,6 +226,12 @@ passport.use(
         const newUser = {
           username: username,
           password: createHash(password),
+          name: req.body.name,
+          surname: req.body.surname,
+          age: req.body.age,
+          address: req.body.address,
+          number: req.body.number,
+          avatar: req.body.avatar,
         };
         logger.log(newUser);
         Usuarios.create(newUser, (err, userWithId) => {
