@@ -79,7 +79,7 @@ input {
 }
 .lista {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(1, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -87,6 +87,11 @@ input {
   text-align: center;
   font-size: 1.4rem;
   margin: 1%;
+}
+.lista button {
+  font-size: 1rem;
+  padding: 2%;
+  width: 30%;
 }
 .listaProductos {
   padding: 20px;

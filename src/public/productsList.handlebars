@@ -2,9 +2,10 @@
   {{#each products}}
     <div class="lista">
       <p>{{this.nombre}}</p>
-      <p>{{this.precio}}</p>
+      <p>${{this.precio}}</p>
       <p>{{this.stock}}</p>
       <img src="{{this.img}}" class="product-img" />
+      <button onclick="agregarAlCarrito('{{this}}')">Agregar al carrito</button>
     </div>
   {{/each}}
 {{/if}}
