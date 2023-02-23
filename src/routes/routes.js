@@ -1,3 +1,4 @@
+const email = require("../notification/emails.js");
 const logger = require("../logs/logger.js");
 const Usuarios = require("../models/userSchema.js");
 
@@ -51,6 +52,7 @@ const postSignIn = (req, res) => {
   const address = req.body.address;
   const number = req.body.number;
   logger.info(username + " Registrado");
+  email("nuevo registro", JSON.stringify(req.body));
   res.render("login", {
     username,
     password,

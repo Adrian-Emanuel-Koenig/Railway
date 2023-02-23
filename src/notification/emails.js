@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const emailOwner = "adrian.95.koenig@gmail.com";
 
-const email = async (body, subject) => {
+const email = async (subject, body) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     port: 587,
@@ -16,14 +16,14 @@ const email = async (body, subject) => {
   });
 
   const info = await transporter.sendMail({
-    from: "adrian.95.koenig@gmail.com", 
-    to: emailOwner, 
-    subject: "hola", 
-    text: "New user registered", 
-    html: `<h1>Hola</h1>`, 
+    from: "adrian.95.koenig@gmail.com",
+    to: emailOwner,
+    subject: subject,
+    html: `<h1>Informe</h1>
+    <p>${body}</p>`,
   });
 
   console.log("Message sent: %s", info.messageId);
 };
 
-export default email;
+module.exports = email;
