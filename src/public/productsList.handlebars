@@ -1,16 +1,32 @@
 {{#if products}}
+      <table class="table table-dark" >
+  <thead>
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Imagen</th>
+      <th scope="col">Agregar al carrito</th>
+    </tr>
+  </thead>
   {{#each products}}
-    <div class="lista">
-      <p>{{this.nombre}}</p>
-      <p>${{this.precio}}</p>
-      <p>{{this.stock}}</p>
-      <img src="{{this.img}}" class="product-img" />
-      <button onclick="agregarAlCarrito('{{this}}')">Agregar al carrito</button>
-    </div>
+  <tbody>
+    <tr>
+      <th scope="row">{{this.nombre}}</th>
+      <td>${{this.precio}}</td>
+      <td>{{this.stock}}</td>
+      <td><img src="{{this.img}}" class="product-img" /></td>
+      <td><form action="/add-to-cart" method="POST" class="cartBtn">
+        <input type="hidden" name="name" value="{{this.nombre}}" />
+        <input type="hidden" name="price" value="{{this.precio}}" />
+        <input type="hidden" name="stock" value="{{this.stock}}" />
+        <input type="submit" value="Agregar al carrito" />
+      </form></td>
+    </tr>
   {{/each}}
 {{/if}}
 
-{{#if fakerproductos}}
+{{!-- {{#if fakerproductos}}
   {{#each fakerproductos}}
     <div class="lista">
       <p>{{this.producto}}</p>
@@ -18,4 +34,4 @@
       <img src="{{this.image}}" class="product-img" />
     </div>
   {{/each}}
-{{/if}}
+{{/if}} --}}

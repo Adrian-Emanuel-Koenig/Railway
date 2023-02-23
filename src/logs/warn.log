@@ -5,3 +5,10 @@
 2023-02-14T22:43:02.851Z warn: User already exists
 2023-02-14T22:43:19.147Z error: Invalid Password
 2023-02-21T21:01:41.584Z error: Error in Saving user: ValidationError: avatar: Path `avatar` is required., number: Path `number` is required., address: Path `address` is required., age: Path `age` is required., surname: Path `surname` is required., name: Path `name` is required.
+2023-02-23T18:20:52.398Z warn: User Not Found with username koenig@gmail.com
+2023-02-23T19:37:03.237Z warn: User already exists
+2023-02-23T19:37:54.078Z error: Error in Saving user: ValidationError: age: Path `age` (123) is more than maximum allowed value (100).
+2023-02-23T19:48:50.221Z warn: User already exists
+2023-02-23T19:49:21.289Z error: Error in Saving user: ValidationError: age: Path `age` (123) is more than maximum allowed value (100).
+2023-02-23T19:51:45.850Z warn: User already exists
+2023-02-23T19:53:59.901Z warn: User already exists

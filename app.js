@@ -85,17 +85,9 @@ app.enable("trust proxy");
 
 app.use("/api/productos", Router);
 
-app.use("/api/productos-test", (req, res) => {
-  let prodFaker = [];
-  // for (let i = 0; i < 5; i++) {
-  //   prodFaker.push({
-  //     producto: faker.commerce.product(),
-  //     precio: faker.commerce.price(1000, 4000, 0, "$"),
-  //     image: faker.image.abstract(150, 150),
-  //   });
-  // }
-  res.json(prodFaker);
-});
+// app.use("/api/productos-test", (req, res) => {
+//   res.render("cart");
+// });
 
 app.use("/api/nombre", (req, res) => {
   res.json(req.session.username);
@@ -173,6 +165,44 @@ app.get("/info", compression(), (req, res) => {
     "Versión de node.js": process.version,
   });
 });
+
+/* -------------------------------------------------------------------------- */
+/*                                   Carrito                                  */
+/* -------------------------------------------------------------------------- */
+const cartItems = [];
+
+app.post("/add-to-cart", (req, res) => {
+  const { name, stock, price } = req.body;
+  const product = {
+    name,
+    stock,
+    price: parseFloat(price),
+    quantity: 1,
+  };
+  console.log(product);
+  // Verificar si el producto ya está en el carrito
+  const existingProductIndex = cartItems.findIndex(
+    (item) => item.name === product.name
+  );
+  if (existingProductIndex !== -1) {
+    // Si el producto ya está en el carrito, aumentar su cantidad
+    cartItems[existingProductIndex].quantity++;
+  } else {
+    // Si el producto no está en el carrito, agregarlo
+    cartItems.push(product);
+  }
+
+  res.redirect("/");
+});
+
+app.get("/api/productos-test", (req, res) => {
+  const total = cartItems.reduce(
+    (acc, curr) => acc + curr.quantity * curr.price,
+    0
+  );
+  res.render("cart", { cartItems, total });
+});
+
 /* -------------------------------------------------------------------------- */
 /*                                  Passport                                  */
 /* -------------------------------------------------------------------------- */
