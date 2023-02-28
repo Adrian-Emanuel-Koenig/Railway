@@ -2,6 +2,7 @@ const email = require("../notification/emails.js");
 const logger = require("../logs/logger.js");
 const Usuarios = require("../models/userSchema.js");
 const whatsapp = require("../notification/whatsapp.js");
+const cartItems = require("../../app.js");
 
 const home = (req, res) => {
   if (req.session?.username) {
@@ -28,6 +29,7 @@ const renderizar = (req, res, next) => {
 
 const logout = (req, res) => {
   const nombre = req.session.nombre;
+  console.log(cartItems)
   setTimeout(() => {
     req.session.destroy((err) => {
       if (err) {
@@ -53,7 +55,7 @@ const postSignIn = (req, res) => {
   const address = req.body.address;
   const number = req.body.number;
   logger.info(username + " Registrado");
-  // email("nuevo registro", JSON.stringify(req.body));
+  email("nuevo registro", JSON.stringify(req.body));
   res.render("login", {
     username,
     password,
