@@ -11,6 +11,7 @@ const userSchema = new Schema({
   avatar: { type: String, required: true },
   username: { type: String, required: true, max: 30 },
   password: { type: String, required: true, max: 30 },
+  products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
 });
 
 userSchema.plugin(findOrCreate);

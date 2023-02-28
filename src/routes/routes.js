@@ -1,6 +1,8 @@
 const email = require("../notification/emails.js");
 const logger = require("../logs/logger.js");
 const Usuarios = require("../models/userSchema.js");
+const whatsapp = require("../notification/whatsapp.js");
+const cartItems = require("../../app.js");
 
 const home = (req, res) => {
   if (req.session?.username) {
@@ -27,6 +29,7 @@ const renderizar = (req, res, next) => {
 
 const logout = (req, res) => {
   const nombre = req.session.nombre;
+  console.log(cartItems)
   setTimeout(() => {
     req.session.destroy((err) => {
       if (err) {
@@ -65,6 +68,14 @@ const postSignIn = (req, res) => {
   });
 };
 
+const buyCart = (req, res) => {
+  const listado = cartItems;
+  const total = req.body.total;
+  console.log(listado);
+  console.log(total);
+  res.redirect("/");
+  // whatsapp("S")
+};
 module.exports = {
   home,
   getLogin,
@@ -73,4 +84,5 @@ module.exports = {
   logout,
   getSignIn,
   postSignIn,
+  buyCart,
 };

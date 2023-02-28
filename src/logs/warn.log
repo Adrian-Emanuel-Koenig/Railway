@@ -12,3 +12,4 @@
 2023-02-23T19:49:21.289Z error: Error in Saving user: ValidationError: age: Path `age` (123) is more than maximum allowed value (100).
 2023-02-23T19:51:45.850Z warn: User already exists
 2023-02-23T19:53:59.901Z warn: User already exists
+2023-02-28T00:48:40.849Z error: Error al desloguear

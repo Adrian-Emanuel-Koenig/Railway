@@ -22,6 +22,8 @@ const minimist = require("minimist");
 const { fork } = require("child_process");
 const compression = require("compression");
 const logger = require("./src/logs/logger.js");
+const whatsapp = require("./src/notification/whatsapp.js");
+const email = require("./src/notification/emails.js");
 const { product, price, image } = faker;
 
 const args = minimist(process.argv.slice(2));
@@ -140,7 +142,21 @@ app.post(
   passport.authenticate("login", { failureRedirect: "/failureLogin" }),
   routes.postLogin
 );
-app.get("/logout", routes.renderizar, routes.logout);
+// app.get("/logout", routes.renderizar, routes.logout);
+app.get("/logout", routes.renderizar, (req, res) => {
+  cartItems = []
+  const nombre = req.session.nombre;
+  setTimeout(() => {
+    req.session.destroy((err) => {
+      if (err) {
+        logger.error("Error al desloguear");
+      } else {
+        logger.info(nombre + " deslogueado");
+      }
+    });
+  }, 2000);
+});
+
 app.get("/signup", routes.getSignIn);
 app.post(
   "/signup",
@@ -169,7 +185,8 @@ app.get("/info", compression(), (req, res) => {
 /* -------------------------------------------------------------------------- */
 /*                                   Carrito                                  */
 /* -------------------------------------------------------------------------- */
-const cartItems = [];
+let cartItems = [];
+module.exports = cartItems;
 
 app.post("/add-to-cart", (req, res) => {
   const { name, stock, price } = req.body;
@@ -196,6 +213,8 @@ app.post("/add-to-cart", (req, res) => {
 });
 
 app.get("/api/productos-test", (req, res) => {
+  console.log(cartItems);
+
   const total = cartItems.reduce(
     (acc, curr) => acc + curr.quantity * curr.price,
     0
@@ -203,6 +222,26 @@ app.get("/api/productos-test", (req, res) => {
   res.render("cart", { cartItems, total });
 });
 
+app.post("/comprar", (req, res) => {
+  const total = req.body.total;
+  whatsapp(
+    "Orden realizada, total a pagar: $" +
+      total +
+      ".Productos: " +
+      JSON.stringify(cartItems)
+  );
+  email(
+    "nuevo pedido de",
+    JSON.stringify(cartItems) + "Total a pagar: " + total
+  );
+
+  res.redirect("/");
+});
+
+app.post("/vaciar", (req, res) => {
+  cartItems = [];
+  res.redirect("/");
+});
 /* -------------------------------------------------------------------------- */
 /*                                  Passport                                  */
 /* -------------------------------------------------------------------------- */
@@ -262,6 +301,7 @@ passport.use(
           address: req.body.address,
           number: req.body.number,
           avatar: req.body.avatar,
+          products: [],
         };
         logger.log(newUser);
         Usuarios.create(newUser, (err, userWithId) => {

@@ -37,7 +37,17 @@
 </table>
 
 <h2>Total de la compra: ${{total}}</h2>
-
+{{#if cartItems}}
+<form action="/comprar" method="POST" class="cartBtn">
+        <input type="hidden" name="productos" value="{{cartItems}}" />
+        <input type="hidden" name="total" value="{{total}}" />
+        <input type="submit" value="Comprar"  class="btn btn-primary"/>
+      </form>
+      <form action="/vaciar" method="POST" class="cartBtn">
+        <input type="hidden" name="total" value="{{total}}" />
+        <input type="submit" value="Vaciar carro"  class="btn btn-danger"/>
+      </form>
+{{/if}}
   </body>
 
 </html>

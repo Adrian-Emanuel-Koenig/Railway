@@ -7,7 +7,14 @@ const containerProducto = document.getElementById("containerProducto");
 const containerFaker = document.getElementById("containerFaker");
 const sendForm = document.getElementById("sendForm");
 const username = document.getElementById("username");
+const btnLogout = document.getElementById("logoutBtn")
 /* -------------------------------- Functions ------------------------------- */
+function logoutBtn(){
+  location.href = "/logout"
+}
+
+btnLogout.addEventListener("click", logoutBtn)
+
 function renderUser() {
   fetch(`${API}/api/nombre`)
     .then((res) => res.text())
