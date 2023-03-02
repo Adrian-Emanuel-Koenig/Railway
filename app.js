@@ -144,7 +144,7 @@ app.post(
 );
 // app.get("/logout", routes.renderizar, routes.logout);
 app.get("/logout", routes.renderizar, (req, res) => {
-  cartItems = []
+  cartItems = [];
   const nombre = req.session.nombre;
   setTimeout(() => {
     req.session.destroy((err) => {

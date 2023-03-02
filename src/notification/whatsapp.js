@@ -1,5 +1,5 @@
 const accountSid = "ACee58f27a95f0f7171ae361021bf17390";
-const authToken = "cf9e9ef373ac376a35084d3b7f6bdd9d";
+const authToken = "d0b262cc7cd8fe39534b88a9889ea1af";
 const client = require("twilio")(accountSid, authToken);
 
 const whatsapp = (body) => {
