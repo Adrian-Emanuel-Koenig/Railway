@@ -2,7 +2,7 @@ const config = require("dotenv").config;
 config();
 
 const mongoose = require("mongoose");
-const logger = require("../logs/logger");
+const logger = require("../../logs/logger.js");
 const connect = mongoose.connect;
 
 mongoose.set("strictQuery", true);

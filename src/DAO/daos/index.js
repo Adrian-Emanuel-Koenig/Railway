@@ -1,12 +1,12 @@
-const ProductosDaoMongoDB = require("./super/ProductosDaoMongoDb.js");
-const MensajesDaoMongoDB = require("./super/MensajesDaoMongoDB.js");
+const ProductosDaoMongoDB = require("./super/products.js");
+const MensajesDaoMongoDB = require("./super/messages.js");
 
 const instancias = [
   {
     nombre: ProductosDaoMongoDB,
     id: "mongo",
     descripcion: "productos",
-    class: "Producto"
+    class: "Producto",
   },
   {
     nombre: MensajesDaoMongoDB,
