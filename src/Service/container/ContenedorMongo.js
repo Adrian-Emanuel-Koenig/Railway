@@ -1,6 +1,6 @@
-const model = require("../models/prodSchema.js");
-const modelMsgs = require("../models/msgSchema.js");
-const logger = require("../logs/logger.js");
+const model = require("../../DAO/models/products.js");
+const modelMsgs = require("../../DAO/models/messages.js");
+const logger = require("../../logs/logger.js");
 
 class ContenedorMongo {
   constructor(collection) {

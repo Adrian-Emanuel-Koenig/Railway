@@ -46,6 +46,7 @@ function renderProducts(data) {
       containerProducto.innerHTML = template({ products: data });
     });
 }
+
 function renderFaker(data) {
   fetch(`${API}/api/productos-test`)
     .then((res) => res.json())
