@@ -30,6 +30,14 @@ class ContenedorMongo {
       logger.error(error);
     }
   }
+
+  async readObject(id) {
+    try {
+      return await this.collection.findOne(id);
+    } catch (error) {
+      logger.error(error);
+    }
+  }
 }
 
 module.exports = ContenedorMongo;
