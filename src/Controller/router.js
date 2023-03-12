@@ -2,7 +2,8 @@ const email = require("../Service/notification/emails.js");
 const logger = require("../logs/logger.js");
 const Usuarios = require("../DAO/models/users.js");
 const whatsapp = require("../Service/notification/whatsapp.js");
-let cartItems = []
+const User = require("../DAO/daos/users.js");
+let cartItems = [];
 
 const home = (req, res) => {
   if (req.session?.username) {
@@ -18,8 +19,12 @@ const getLogin = (req, res) => {
 
 const postLogin = (req, res) => {
   req.session.username = req.body.username;
-  logger.log("info", req.session.username + " login");
-  res.redirect("/");
+  if (User.read(req.body.username)) {
+    logger.log("info", req.session.username + " login");
+    res.redirect("/");
+  } else {
+    res.render("login", { login: true });
+  }
 };
 
 const renderizar = (req, res, next) => {
@@ -56,6 +61,18 @@ const postSignIn = (req, res) => {
   const address = req.body.address;
   const number = req.body.number;
   logger.info(username + " Registrado");
+  /* ------------------------------ Sin Passport ------------------------------ */
+  User.create({
+    username,
+    password,
+    avatar,
+    name,
+    surname,
+    age,
+    address,
+    number,
+  });
+  /* -------------------------------------------------------------------------- */
   email("nuevo registro", JSON.stringify(req.body));
   res.render("login", {
     username,
@@ -140,7 +157,7 @@ const clearCart = (req, res) => {
 
 const sessionName = (req, res) => {
   res.json(req.session.username);
-}
+};
 module.exports = {
   home,
   getLogin,
@@ -157,5 +174,5 @@ module.exports = {
   getCart,
   postCart,
   clearCart,
-  sessionName
+  sessionName,
 };
