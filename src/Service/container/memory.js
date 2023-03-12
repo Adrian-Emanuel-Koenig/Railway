@@ -11,11 +11,17 @@ class MemoryCrud {
   }
 
   read(id) {
-    return new Promise((resolve, reject) => {
-      const object = this.data.find((obj) => obj.id === id);
-      if (!object) reject(new Error("Object not found"));
-      resolve(object);
-    });
+    const object = this.data.find((obj) => obj.id == id);
+    if (!object) {
+      return console.log("User not found");
+    }
+    return object;
+    // return new Promise((resolve, reject) => {
+    //   if (!object){
+    //     console.log("user not found")
+    //   }
+    //   resolve(object);
+    // });
   }
 
   update(id, newObject) {
